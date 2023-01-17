@@ -1,14 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 
+import CommentService from '../api';
 import { EditCommentState } from '../interface';
 
 export const getCommentByIdThunk = createAsyncThunk(
   'comments/getCommentId',
-  async (id: number) => {
-    const response = axios.get(`http://localhost:4000/comments/${id}`);
-    return response;
-  }
+  async (id: number) => await CommentService.getComment(id)
 );
 
 const initialState: EditCommentState = {

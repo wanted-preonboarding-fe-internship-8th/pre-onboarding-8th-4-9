@@ -1,16 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+import CommentService from '../api';
+
 interface TotalCountType {
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
   totalCount: number;
 }
 export const getCommentsTotalCountThunk = createAsyncThunk(
   'comments/total',
-  async () => {
-    const response = axios.get('http://localhost:4000/comments');
-    return response;
-  }
+  async () => await CommentService.getAllComments()
 );
 
 const initialState: TotalCountType = {

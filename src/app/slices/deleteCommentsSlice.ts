@@ -1,15 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 
+import CommentService from '../api';
 import { DeleteCommentState } from '../interface';
 
 export const deleteCommentsThunk = createAsyncThunk(
   'comments/delete',
-  async (id: number) => {
-    axios.delete(`http://localhost:4000/comments/${id}`).then((response) => {
-      return response;
-    });
-  }
+  async (id: number) => await CommentService.deleteComment(id)
 );
 
 const initialState: DeleteCommentState = {
