@@ -20,8 +20,8 @@ function FormList() {
   });
 
   const onPostingComment = (e: React.FormEvent<HTMLFormElement>) => {
-    const { profile_url, author, content, createdAt } = commentFormValue;
     e.preventDefault();
+    const { profile_url, author, content, createdAt } = commentFormValue;
     dispatch(
       postCommentsThunk({
         profile_url,
@@ -44,7 +44,7 @@ function FormList() {
 
   return (
     <FormStyle>
-      <form onSubmit={(e) => onPostingComment(e)}>
+      <form onSubmit={onPostingComment}>
         <input
           type="text"
           name="profile_url"
