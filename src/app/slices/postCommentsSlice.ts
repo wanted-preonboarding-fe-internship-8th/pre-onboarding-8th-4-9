@@ -33,15 +33,11 @@ export const postCommentsSlice = createSlice({
     builder.addCase(postCommentsThunk.pending, (state) => {
       state.loading = 'pending';
     });
-    builder.addCase(postCommentsThunk.fulfilled, (state, action) => {
+    builder.addCase(postCommentsThunk.fulfilled, (state, { payload }) => {
       state.loading = 'succeeded';
-      console.log('payload', action.payload);
-      //TODO: check
-      action.payload;
+      state.comment = payload.data;
     });
-
     builder.addCase(postCommentsThunk.rejected, (state) => {
-      console.log(state.comment);
       state.loading = 'failed';
     });
   },
