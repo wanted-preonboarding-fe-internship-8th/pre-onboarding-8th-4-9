@@ -12,13 +12,6 @@ const Page = styled.button`
   font-size: 1rem;
   line-height: 1.5;
   border: 1px solid lightgray;
-  ${({ active }) =>
-    active &&
-    `
-        background: gray;
-        color: #fff;
-  `}
-  margin-right: 3px;
 `;
 
 function PageList() {
