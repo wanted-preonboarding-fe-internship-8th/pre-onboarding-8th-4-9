@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "prepare": "husky install",
+    "lint": "eslint --cache",
+    "api": "npx json-server ./data.json --port 4000"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
