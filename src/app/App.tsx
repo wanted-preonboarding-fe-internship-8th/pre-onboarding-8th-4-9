@@ -1,7 +1,43 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import CommentList from '../pages/CommentList';
+import FormList from '../pages/FormList';
+import PageList from '../pages/PageList';
+
+import { getCommentsThunk } from './slices/getCommentsSlice';
+import { useAppDispatch, RootState } from './store';
 
 function App() {
-  return <h2 className="App">hello from App</h2>;
+  //TODO: pagination
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const dispatch = useAppDispatch();
+  const { comments, loading } = useSelector(
+    (state: RootState) => state.commentsReducer
+  );
+
+  console.log(comments);
+
+  useEffect(() => {
+    if (loading === 'succeeded') return;
+    dispatch(
+      getCommentsThunk({
+        page: currentPage,
+        limit: 5,
+        order: 'desc',
+        sort: 'id',
+      })
+    );
+  }, [currentPage]);
+
+  return (
+    <div>
+      <CommentList comments={comments} />
+      <PageList />
+      <FormList />
+    </div>
+  );
 }
 
 export default App;

@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { postCommentsThunk } from '../app/slices/postCommentsSlice';
-import { putCommentsThunk } from '../app/slices/putCommentsSlice';
 import { useAppDispatch, RootState } from '../app/store';
 
-function Form() {
+function FormList() {
   const dispatch = useAppDispatch();
 
   const commentById = useSelector(
     (state: RootState) => state.getCommentByIdReducer.comment
   );
+
   const [commentFormValue, setCommentFormValue] = useState({
-    profile_url: commentById?.profile_url || '',
-    author: commentById?.author || '',
-    content: commentById?.comment?.content || '',
-    createdAt: commentById?.createdAt || '',
+    profile_url: '',
+    author: '',
+    content: '',
+    createdAt: '',
   });
 
   const onPostingComment = (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,69 +32,29 @@ function Form() {
     );
   };
 
-  const onEditingComment = (e: React.FormEvent<HTMLFormElement>) => {
-    const { profile_url, author, content, createdAt } = commentFormValue;
-    const { id } = commentById;
-    e.preventDefault();
-    console.log({
-      id,
-      profile_url,
-      author,
-      content,
-      createdAt,
-    });
-    dispatch(
-      putCommentsThunk({
-        id,
-        profile_url,
-        author,
-        content,
-        createdAt,
-      })
-    );
-  };
-
-  // custom hook
-  const setProfileUrl = (e: any) => {
+  useEffect(() => {
+    if (!commentById) return;
     setCommentFormValue({
-      ...commentFormValue,
-      profile_url: e.target.value,
+      profile_url: commentById?.profile_url,
+      author: commentById?.author,
+      content: commentById?.content,
+      createdAt: commentById?.createdAt,
     });
-  };
-
-  const setAuthor = (e: any) => {
-    setCommentFormValue({
-      ...commentFormValue,
-      author: e.target.value,
-    });
-  };
-
-  const setContent = (e: any) => {
-    setCommentFormValue({
-      ...commentFormValue,
-      content: e.target.value,
-    });
-  };
-
-  const setCreatedAt = (e: any) => {
-    setCommentFormValue({
-      ...commentFormValue,
-      createdAt: e.target.value,
-    });
-  };
+  }, [commentById]);
 
   return (
     <FormStyle>
-      <form
-        onSubmit={
-          commentById ? (e) => onEditingComment(e) : (e) => onPostingComment(e)
-        }
-      >
+      <form onSubmit={(e) => onPostingComment(e)}>
         <input
           type="text"
           name="profile_url"
           value={commentFormValue.profile_url}
-          onChange={setProfileUrl}
+          onChange={(e) =>
+            setCommentFormValue({
+              ...commentFormValue,
+              profile_url: e.target.value,
+            })
+          }
           placeholder="https://picsum.photos/id/1/50/50"
           required
         />
@@ -103,14 +63,24 @@ function Form() {
           type="text"
           name="author"
           value={commentFormValue.author}
-          onChange={setAuthor}
+          onChange={(e) =>
+            setCommentFormValue({
+              ...commentFormValue,
+              author: e.target.value,
+            })
+          }
           placeholder="작성자"
         />
         <br />
         <textarea
           name="content"
           value={commentFormValue.content}
-          onChange={setContent}
+          onChange={(e) =>
+            setCommentFormValue({
+              ...commentFormValue,
+              content: e.currentTarget.value,
+            })
+          }
           placeholder="내용"
           required
         ></textarea>
@@ -119,8 +89,13 @@ function Form() {
           type="text"
           name="createdAt"
           value={commentFormValue.createdAt}
-          onChange={setCreatedAt}
-          placeholder="2023-01-19"
+          onChange={(e) =>
+            setCommentFormValue({
+              ...commentFormValue,
+              createdAt: e.target.value,
+            })
+          }
+          placeholder="2020-05-30"
           required
         />
         <br />
@@ -130,7 +105,7 @@ function Form() {
   );
 }
 
-export default Form;
+export default FormList;
 
 const FormStyle = styled.div`
   & > form {
