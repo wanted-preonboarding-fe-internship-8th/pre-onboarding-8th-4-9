@@ -1,14 +1,14 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import styled from "styled-components";
+import { ChangeEvent, useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 function Form({ postdata, onEditData, editComment }) {
   const [onEdit, setOnEdit] = useState(false);
   const [formData, setFormData] = useState({
     id: 0,
-    profile_url: "",
-    author: "",
-    content: "",
-    createdAt: "",
+    profile_url: '',
+    author: '',
+    content: '',
+    createdAt: '',
   });
 
   useEffect(() => {
@@ -17,7 +17,7 @@ function Form({ postdata, onEditData, editComment }) {
   }, [onEditData]);
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -27,10 +27,10 @@ function Form({ postdata, onEditData, editComment }) {
     if (onEdit) editComment(formData);
     setFormData({
       id: 0,
-      profile_url: "",
-      author: "",
-      content: "",
-      createdAt: "",
+      profile_url: '',
+      author: '',
+      content: '',
+      createdAt: '',
     });
   };
 
@@ -72,7 +72,7 @@ function Form({ postdata, onEditData, editComment }) {
         />
         <br />
         <button onClick={handleSubmit} type="submit">
-          {onEdit ? "수정" : "등록"}
+          {onEdit ? '수정' : '등록'}
         </button>
       </form>
     </FormStyle>
@@ -89,7 +89,7 @@ const FormStyle = styled.div`
     width: 98%;
     height: 50px;
   }
-  & > form > input[type="text"] {
+  & > form > input[type='text'] {
     padding: 5px 1%;
     width: 98%;
     margin-bottom: 10px;

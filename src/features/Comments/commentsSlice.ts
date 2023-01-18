@@ -1,18 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { fetchComments } from "./fetchComments";
-import { fetchOneComment } from "./fetchOneComment";
-import { addComment } from "./addComment";
-import { editComment } from "./editComment";
-import { removeComment } from "./removeComment";
+import { createSlice } from '@reduxjs/toolkit';
+
+import { addComment } from './addComment';
+import { editComment } from './editComment';
+import { fetchComments } from './fetchComments';
+import { fetchOneComment } from './fetchOneComment';
+import { removeComment } from './removeComment';
 
 const commentsSlice = createSlice({
-  name: "comments",
+  name: 'comments',
   initialState: {
     data: [],
     isLoading: false,
     error: null,
     onEditData: {},
   },
+
   reducers: {},
   extraReducers(builder) {
     // 전체 댓글 로딩
@@ -61,7 +63,7 @@ const commentsSlice = createSlice({
     builder.addCase(editComment.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = state.data.map((comment) =>
-        comment.id === action.payload.id ? action.meta.arg : comment,
+        comment.id === action.payload.id ? action.meta.arg : comment
       );
     });
     builder.addCase(editComment.rejected, (state, action) => {

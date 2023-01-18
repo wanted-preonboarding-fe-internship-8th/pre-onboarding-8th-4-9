@@ -1,14 +1,14 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { addComment } from "../features/Comments/addComment";
-import { editComment } from "../features/Comments/editComment";
-import Form from "../components/Form";
+import Form from '../components/Form';
+import { addComment } from '../features/Comments/addComment';
+import { editComment } from '../features/Comments/editComment';
 
 function FormContainer() {
   const dispatch = useDispatch();
   const { isLoading, data, error, onEditData } = useSelector(
-    (state) => state.comments,
+    (state) => state.comments
   );
 
   return (

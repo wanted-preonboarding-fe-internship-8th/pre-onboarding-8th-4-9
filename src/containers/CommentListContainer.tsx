@@ -1,9 +1,10 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { fetchComments } from "../features/Comments/fetchComments";
-import { fetchOneComment } from "../features/Comments/fetchOneComment";
-import { removeComment } from "../features/Comments/removeComment";
-import CommentList from "../components/CommentList";
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import CommentList from '../components/CommentList';
+import { fetchComments } from '../features/Comments/fetchComments';
+import { fetchOneComment } from '../features/Comments/fetchOneComment';
+import { removeComment } from '../features/Comments/removeComment';
 
 function CommentListContainer() {
   const dispatch = useDispatch();
