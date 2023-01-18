@@ -16,7 +16,7 @@ function FormContainer() {
     <Form
       postComment={(comment: CommentType) => dispatch(addComment(comment))}
       onEditData={onEditData}
-      editComment={(comment) => dispatch(editComment(comment))}
+      editComment={(newComment) => dispatch(editComment(newComment))}
     />
   );
 }

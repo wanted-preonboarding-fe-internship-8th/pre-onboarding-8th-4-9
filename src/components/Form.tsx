@@ -6,7 +6,7 @@ import { CommentType } from '../interfaces';
 type FormType = {
   postComment: (comment: CommentType) => void;
   onEditData: any;
-  editComment: (comment: CommentType, newData: number) => void;
+  editComment: (newComment: CommentType) => void;
 };
 
 function Form({ postComment, onEditData, editComment }: FormType) {
@@ -32,7 +32,7 @@ function Form({ postComment, onEditData, editComment }: FormType) {
 
   const handleSubmit = () => {
     if (!onEdit) postComment(formData);
-    if (onEdit) editComment(formData, formData.id);
+    if (onEdit) editComment(formData);
     setFormData({
       id: 0,
       profile_url: '',
@@ -40,7 +40,10 @@ function Form({ postComment, onEditData, editComment }: FormType) {
       content: '',
       createdAt: '',
     });
+    setOnEdit(false);
   };
+
+  console.log(onEdit);
 
   return (
     <FormStyle>

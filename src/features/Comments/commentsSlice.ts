@@ -87,7 +87,7 @@ const commentsSlice = createSlice({
     builder.addCase(editComment.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = state.data.map((comment: CommentType) =>
-        comment.id === action.payload.id ? action.meta.arg : comment
+        comment.id === action.payload.id ? action.payload : comment
       );
     });
     builder.addCase(editComment.rejected, (state, action) => {
