@@ -49,7 +49,7 @@ function Form({ postComment, onEditData, editComment }: FormType) {
           type="text"
           name="profile_url"
           placeholder="https://picsum.photos/id/1/50/50"
-          value={formData.profile_url}
+          value={formData.profile_url || ''}
           onChange={handleChange}
           required
         />
@@ -58,14 +58,14 @@ function Form({ postComment, onEditData, editComment }: FormType) {
           type="text"
           name="author"
           placeholder="작성자"
-          value={formData.author}
+          value={formData.author || ''}
           onChange={handleChange}
         />
         <br />
         <textarea
           name="content"
           placeholder="내용"
-          value={formData.content}
+          value={formData.content || ''}
           onChange={handleChange}
           required
         ></textarea>
@@ -74,7 +74,7 @@ function Form({ postComment, onEditData, editComment }: FormType) {
           type="text"
           name="createdAt"
           placeholder="2020-05-30"
-          value={formData.createdAt}
+          value={formData.createdAt || ''}
           onChange={handleChange}
           required
         />
