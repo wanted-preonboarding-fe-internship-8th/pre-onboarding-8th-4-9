@@ -19,8 +19,7 @@ function FormList() {
     createdAt: '',
   });
 
-  const onPostingComment = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onPostingComment = () => {
     const { profile_url, author, content, createdAt } = commentFormValue;
     dispatch(
       postCommentsThunk({
