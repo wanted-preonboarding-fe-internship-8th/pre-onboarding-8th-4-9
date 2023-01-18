@@ -43,8 +43,6 @@ function Form({ postComment, onEditData, editComment }: FormType) {
     setOnEdit(false);
   };
 
-  console.log(onEdit);
-
   return (
     <FormStyle>
       <form onSubmit={handleSubmit}>
