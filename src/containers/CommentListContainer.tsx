@@ -1,26 +1,40 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useCallback, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
+import { RootState, useAppDispatch } from '../app/store';
 import CommentList from '../components/CommentList';
 import { fetchComments } from '../features/Comments/fetchComments';
 import { fetchOneComment } from '../features/Comments/fetchOneComment';
 import { removeComment } from '../features/Comments/removeComment';
+import { CommentType } from '../interfaces';
 
 function CommentListContainer() {
-  const dispatch = useDispatch();
-  const { isLoading, data, error } = useSelector((state) => state.comments);
+  const dispatch = useAppDispatch();
+  const { isLoading, data, error } = useSelector(
+    (state: RootState) => state.comments
+  );
+  const { id } = useParams();
+
+  const onGetFetchComments = useCallback(async () => {
+    await dispatch(
+      fetchComments({ page: Number(id), limit: 5, order: 'desc', sort: 'id' })
+    );
+  }, [id]);
 
   useEffect(() => {
-    dispatch(fetchComments());
-  }, [dispatch]);
+    onGetFetchComments();
+  }, [onGetFetchComments]);
 
   return (
     <CommentList
       isLoading={isLoading}
       data={data}
       error={error}
-      fetchOneComment={(comment) => dispatch(fetchOneComment(comment))}
-      removeComment={(comment) => dispatch(removeComment(comment))}
+      fetchOneComment={(comment: CommentType) =>
+        dispatch(fetchOneComment(comment))
+      }
+      removeComment={(comment: CommentType) => dispatch(removeComment(comment))}
     />
   );
 }

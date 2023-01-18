@@ -1,7 +1,15 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-function Form({ postdata, onEditData, editComment }) {
+import { CommentType } from '../interfaces';
+
+type FormType = {
+  postComment: (comment: CommentType) => void;
+  onEditData: any;
+  editComment: (newComment: CommentType) => void;
+};
+
+function Form({ postComment, onEditData, editComment }: FormType) {
   const [onEdit, setOnEdit] = useState(false);
   const [formData, setFormData] = useState({
     id: 0,
@@ -23,7 +31,7 @@ function Form({ postdata, onEditData, editComment }) {
   };
 
   const handleSubmit = () => {
-    if (!onEdit) postdata(formData);
+    if (!onEdit) postComment(formData);
     if (onEdit) editComment(formData);
     setFormData({
       id: 0,
@@ -32,16 +40,19 @@ function Form({ postdata, onEditData, editComment }) {
       content: '',
       createdAt: '',
     });
+    setOnEdit(false);
   };
+
+  console.log(onEdit);
 
   return (
     <FormStyle>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="profile_url"
           placeholder="https://picsum.photos/id/1/50/50"
-          value={formData.profile_url}
+          value={formData.profile_url || ''}
           onChange={handleChange}
           required
         />
@@ -50,14 +61,14 @@ function Form({ postdata, onEditData, editComment }) {
           type="text"
           name="author"
           placeholder="작성자"
-          value={formData.author}
+          value={formData.author || ''}
           onChange={handleChange}
         />
         <br />
         <textarea
           name="content"
           placeholder="내용"
-          value={formData.content}
+          value={formData.content || ''}
           onChange={handleChange}
           required
         ></textarea>
@@ -66,14 +77,12 @@ function Form({ postdata, onEditData, editComment }) {
           type="text"
           name="createdAt"
           placeholder="2020-05-30"
-          value={formData.createdAt}
+          value={formData.createdAt || ''}
           onChange={handleChange}
           required
         />
         <br />
-        <button onClick={handleSubmit} type="submit">
-          {onEdit ? '수정' : '등록'}
-        </button>
+        <button type="submit">{onEdit ? '수정' : '등록'}</button>
       </form>
     </FormStyle>
   );

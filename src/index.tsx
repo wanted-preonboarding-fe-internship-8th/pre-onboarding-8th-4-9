@@ -8,7 +8,7 @@ import { store } from './app/store';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/:id',
     element: <App />,
   },
 ]);

@@ -1,40 +1,54 @@
 import styled from 'styled-components';
 
+import { CommentType } from '../interfaces';
+
+type CommentListProps = {
+  isLoading: boolean;
+  data: CommentType[];
+  error: any;
+  fetchOneComment: (comment: CommentType) => void;
+  removeComment: (comment: CommentType) => void;
+};
+
 function CommentList({
   isLoading,
   data,
   error,
   fetchOneComment,
   removeComment,
-}) {
+}: CommentListProps) {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error on fetching data...</div>;
 
-  return data.map((comment, idx) => (
-    <Comment key={idx}>
-      <img src={comment.profile_url} alt="" />
-      {comment.author}
-      <CreatedAt>{comment.createdAt}</CreatedAt>
-      <Content>{comment.content}</Content>
-      <Button>
-        <a
-          onClick={() => {
-            fetchOneComment(comment);
-          }}
-        >
-          수정
-        </a>
-        <a
-          onClick={() => {
-            removeComment(comment);
-          }}
-        >
-          삭제
-        </a>
-      </Button>
-      <hr />
-    </Comment>
-  ));
+  return (
+    <>
+      {data.map((comment: CommentType) => (
+        <Comment key={comment.id}>
+          <img src={comment.profile_url} alt="" />
+          {comment.author}
+          <CreatedAt>{comment.createdAt}</CreatedAt>
+          <Content>{comment.content}</Content>
+          <Button>
+            <a
+              onClick={() => {
+                fetchOneComment(comment);
+              }}
+            >
+              수정
+            </a>
+            <a
+              onClick={() => {
+                removeComment(comment);
+              }}
+            >
+              삭제
+            </a>
+          </Button>
+          <hr />
+        </Comment>
+      ))}
+    </>
+  );
 }
 
 const Comment = styled.div`
