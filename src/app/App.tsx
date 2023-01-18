@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import CommentList from '../pages/CommentList';
@@ -17,7 +17,7 @@ function App() {
     (state: RootState) => state.commentsReducer
   );
 
-  useEffect(() => {
+  const onGetComments = useCallback(() => {
     if (loading === 'succeeded') return;
     dispatch(
       getCommentsThunk({
@@ -27,7 +27,11 @@ function App() {
         sort: 'id',
       })
     );
-  }, [currentPage]);
+  }, []);
+
+  useEffect(() => {
+    onGetComments();
+  }, [onGetComments]);
 
   return (
     <div>
