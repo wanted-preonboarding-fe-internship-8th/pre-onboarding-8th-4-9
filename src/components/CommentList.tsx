@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { fetchComments } from '../features/Comments/fetchComments';
 import { CommentType } from '../interfaces';
 
 type CommentListProps = {
@@ -39,6 +40,7 @@ function CommentList({
             <a
               onClick={() => {
                 removeComment(comment);
+                location.reload();
               }}
             >
               삭제
