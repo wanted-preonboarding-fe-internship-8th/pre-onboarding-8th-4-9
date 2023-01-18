@@ -2,7 +2,7 @@
 
 ## 개발 과정 및 Best Practice
 
-1. [댓글 CRUD]()
+1. [댓글 CRUD](https://github.com/wanted-preonboarding-fe-internship-8th/pre-onboarding-8th-4-9/wiki/1.-%EB%8C%93%EA%B8%80-CRUD)
 2. [페이지네이션]()
 3. [댓글 작성, 수정, 삭제 후 동작]()
 
