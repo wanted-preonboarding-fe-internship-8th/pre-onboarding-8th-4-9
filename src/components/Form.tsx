@@ -1,7 +1,15 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-function Form({ postdata, onEditData, editComment }) {
+import { CommentType } from '../interfaces';
+
+type FormType = {
+  postComment: (comment: CommentType) => void;
+  onEditData: any;
+  editComment: (comment: any, newData: any) => void;
+};
+
+function Form({ postComment, onEditData, editComment }: FormType) {
   const [onEdit, setOnEdit] = useState(false);
   const [formData, setFormData] = useState({
     id: 0,
@@ -23,7 +31,7 @@ function Form({ postdata, onEditData, editComment }) {
   };
 
   const handleSubmit = () => {
-    if (!onEdit) postdata(formData);
+    if (!onEdit) postComment(formData);
     if (onEdit) editComment(formData);
     setFormData({
       id: 0,

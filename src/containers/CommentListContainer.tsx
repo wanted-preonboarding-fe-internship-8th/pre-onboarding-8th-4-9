@@ -1,14 +1,18 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
+import { RootState, useAppDispatch } from '../app/store';
 import CommentList from '../components/CommentList';
 import { fetchComments } from '../features/Comments/fetchComments';
 import { fetchOneComment } from '../features/Comments/fetchOneComment';
 import { removeComment } from '../features/Comments/removeComment';
+import { CommentType } from '../interfaces';
 
 function CommentListContainer() {
-  const dispatch = useDispatch();
-  const { isLoading, data, error } = useSelector((state) => state.comments);
+  const dispatch = useAppDispatch();
+  const { isLoading, data, error } = useSelector(
+    (state: RootState) => state.comments
+  );
 
   useEffect(() => {
     dispatch(fetchComments());
@@ -19,8 +23,10 @@ function CommentListContainer() {
       isLoading={isLoading}
       data={data}
       error={error}
-      fetchOneComment={(comment) => dispatch(fetchOneComment(comment))}
-      removeComment={(comment) => dispatch(removeComment(comment))}
+      fetchOneComment={(comment: CommentType) =>
+        dispatch(fetchOneComment(comment))
+      }
+      removeComment={(comment: CommentType) => dispatch(removeComment(comment))}
     />
   );
 }
