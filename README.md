@@ -1,14 +1,21 @@
 # Notice Board with React-Redux
 
-## 클라이언트 배포 링크
-
 ## 개발 과정 및 Best Practice
 
 ## 실행 방법
 
 ```bash
 $ npm install
-$ npm start
+```
+
+**서버**
+```bash
+$ npm run api
+```
+
+**클라이언트**
+```bash
+$ npm run start
 ```
 
 ## 커밋 규칙
