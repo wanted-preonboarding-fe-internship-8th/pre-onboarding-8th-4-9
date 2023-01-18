@@ -4,7 +4,7 @@
 
 1. [댓글 CRUD](https://github.com/wanted-preonboarding-fe-internship-8th/pre-onboarding-8th-4-9/wiki/1.-%EB%8C%93%EA%B8%80-CRUD)
 2. [페이지네이션]()
-3. [댓글 작성, 수정, 삭제 후 동작]()
+3. [댓글 작성, 수정, 삭제 후 동작](https://github.com/wanted-preonboarding-fe-internship-8th/pre-onboarding-8th-4-9/wiki/%EB%8C%93%EA%B8%80-%EC%9E%91%EC%84%B1,-%EC%88%98%EC%A0%95,-%EC%82%AD%EC%A0%9C-%ED%9B%84-%EB%8F%99%EC%9E%91)
 
 ## 실행 방법
 
@@ -13,11 +13,13 @@ $ npm install
 ```
 
 **서버**
+
 ```bash
 $ npm run api
 ```
 
 **클라이언트**
+
 ```bash
 $ npm run start
 ```
