@@ -1,14 +1,19 @@
-import { useSelector, useDispatch } from 'react-redux';
 import { useCallback, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
+import { RootState, useAppDispatch } from '../app/store';
+import CommentList from '../components/CommentList';
 import { fetchComments } from '../features/Comments/fetchComments';
 import { fetchOneComment } from '../features/Comments/fetchOneComment';
 import { removeComment } from '../features/Comments/removeComment';
-import CommentList from '../components/CommentList';
-import { useParams } from 'react-router-dom';
+import { CommentType } from '../interfaces';
 
 function CommentListContainer() {
-  const dispatch = useDispatch();
-  const { isLoading, data, error } = useSelector((state) => state.comments);
+  const dispatch = useAppDispatch();
+  const { isLoading, data, error } = useSelector(
+    (state: RootState) => state.comments
+  );
   const { id } = useParams();
 
   const onGetFetchComments = useCallback(async () => {
