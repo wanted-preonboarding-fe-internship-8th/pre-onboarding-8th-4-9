@@ -19,7 +19,7 @@ function PageList() {
   return (
     <PageListStyle>
       {totalCount < 5 && <Page>1</Page>}
-      {totalCount &&
+      {totalCount > 5 &&
         Array(Math.ceil(totalCount / 5))
           .fill(null)
           .map((count, idx) => <Page key={idx}>{idx + 1}</Page>)}
