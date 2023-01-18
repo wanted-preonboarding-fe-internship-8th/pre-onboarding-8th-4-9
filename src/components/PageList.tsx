@@ -1,14 +1,26 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-function PageList() {
-  const pageArray = [];
+function PageList(totalCount: any) {
+  const navigate = useNavigate();
 
-  pageArray.push(
-    // 임시로 페이지 하나만 설정했습니다.
-    <Page key="1">1</Page>
+  const onMovePage = (page: number) => {
+    navigate(`/${page}`);
+  };
+
+  return (
+    <PageListStyle>
+      {totalCount.totalCount < 5 && <Page>1</Page>}
+      {totalCount.totalCount &&
+        Array(Math.ceil(totalCount.totalCount / 5))
+          .fill(null)
+          .map((count, idx: number) => (
+            <Page key={idx} onClick={() => onMovePage(idx + 1)}>
+              {idx + 1}
+            </Page>
+          ))}
+    </PageListStyle>
   );
-
-  return <PageListStyle>{pageArray}</PageListStyle>;
 }
 
 const PageListStyle = styled.div`
@@ -29,6 +41,7 @@ const Page = styled.button`
         color: #fff;
   `}
   margin-right: 3px;
+  cursor: pointer;
 `;
 
 export default PageList;
