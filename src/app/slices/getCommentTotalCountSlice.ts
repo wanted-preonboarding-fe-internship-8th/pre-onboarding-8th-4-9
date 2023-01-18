@@ -9,7 +9,10 @@ interface TotalCountType {
 }
 export const getCommentsTotalCountThunk = createAsyncThunk(
   'comments/total',
-  async () => await CommentService.getAllComments()
+  async () => {
+    const { data } = await CommentService.getAllComments();
+    return data;
+  }
 );
 
 const initialState: TotalCountType = {
@@ -28,7 +31,7 @@ export const getCommentTotalCountSlice = createSlice({
     });
     builder.addCase(getCommentsTotalCountThunk.fulfilled, (state, action) => {
       state.loading = 'succeeded';
-      state.totalCount = action.payload.data.length;
+      state.totalCount = action.payload.length;
     });
     builder.addCase(getCommentsTotalCountThunk.rejected, (state) => {
       state.loading = 'failed';

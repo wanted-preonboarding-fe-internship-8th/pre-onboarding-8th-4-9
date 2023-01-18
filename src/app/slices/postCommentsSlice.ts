@@ -5,13 +5,15 @@ import { EditCommentState, CommentType } from '../interface';
 
 export const postCommentsThunk = createAsyncThunk(
   'comments/post',
-  async ({ profile_url, author, content, createdAt }: CommentType) =>
-    await CommentService.postComment({
+  async ({ profile_url, author, content, createdAt }: CommentType) => {
+    const { data } = await CommentService.postComment({
       profile_url,
       author,
       content,
       createdAt,
-    })
+    });
+    return data;
+  }
 );
 
 const initialState: EditCommentState = {
@@ -33,15 +35,12 @@ export const postCommentsSlice = createSlice({
     builder.addCase(postCommentsThunk.pending, (state) => {
       state.loading = 'pending';
     });
-    builder.addCase(postCommentsThunk.fulfilled, (state, action) => {
+    builder.addCase(postCommentsThunk.fulfilled, (state, { payload }) => {
       state.loading = 'succeeded';
-      console.log('payload', action.payload);
-      //TODO: check
-      action.payload;
+      state.comment = payload;
+      // state.comment = payload.data;
     });
-
     builder.addCase(postCommentsThunk.rejected, (state) => {
-      console.log(state.comment);
       state.loading = 'failed';
     });
   },
