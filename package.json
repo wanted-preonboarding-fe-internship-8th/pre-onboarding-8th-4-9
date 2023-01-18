@@ -2,6 +2,7 @@
   "name": "pre-onboarding-8th-4-9",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/1",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
