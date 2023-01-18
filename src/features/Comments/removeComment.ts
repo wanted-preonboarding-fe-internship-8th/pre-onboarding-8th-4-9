@@ -11,6 +11,6 @@ export const removeComment = createAsyncThunk(
         method: 'DELETE',
       }
     );
-    return response.json();
+    return comment;
   }
 );
