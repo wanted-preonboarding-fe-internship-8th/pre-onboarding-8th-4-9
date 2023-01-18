@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { fetchComments } from '../features/Comments/fetchComments';
@@ -20,7 +21,7 @@ function CommentList({
 }: CommentListProps) {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error on fetching data...</div>;
-
+  const navigate = useNavigate();
   return (
     <>
       {data.map((comment: CommentType) => (
@@ -40,6 +41,7 @@ function CommentList({
             <a
               onClick={() => {
                 removeComment(comment);
+                navigate(`/1`);
                 location.reload();
               }}
             >

@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { CommentType } from '../interfaces';
@@ -18,6 +19,7 @@ function Form({ postComment, onEditData, editComment }: FormType) {
     content: '',
     createdAt: '',
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (onEditData.id) setOnEdit(true);
@@ -41,6 +43,9 @@ function Form({ postComment, onEditData, editComment }: FormType) {
       createdAt: '',
     });
     setOnEdit(false);
+    if (!onEdit) {
+      navigate(`/1`);
+    }
   };
 
   return (
