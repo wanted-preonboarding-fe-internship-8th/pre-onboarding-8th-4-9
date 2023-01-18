@@ -1,60 +1,30 @@
 {
   "env": {
     "browser": true,
-    "commonjs": true,
-    "node": true,
     "es2021": true
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:import/recommended",
+    "standard-with-typescript",
     "plugin:prettier/recommended"
   ],
+  "overrides": [
+  ],
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
-  "plugins": ["react", "import"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier"
+  ],
   "rules": {
-    "react/react-in-jsx-scope": "off",
-    "no-unused-vars": "off",
-    "react/prop-types": "off",
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index"
-        ],
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        },
-        "newlines-between": "always"
-      }
-    ]
-  },
-  "settings": {
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
-    },
-    "import/resolver": {
-      "typescript": {
-        "alwaysTryTypes": true,
-        "project": "./tsconfig.json"
-      },
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
+    "react/react-in-jsx-scope": ["off"],
+    "react/jsx-uses-react": ["off"],
+    "react/jsx-props-no-spreading": ["warn"],
+    "react/no-unescaped-entities": ["off"],
+    "@typescript-eslint/explicit-function-return-type": "off"
   }
 }

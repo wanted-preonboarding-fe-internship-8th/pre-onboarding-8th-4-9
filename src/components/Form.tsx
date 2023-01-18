@@ -1,136 +1,83 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
+import { ChangeEvent, useEffect, useState } from "react";
+import styled from "styled-components";
 
-import { postCommentsThunk } from '../app/slices/postCommentsSlice';
-import { putCommentsThunk } from '../app/slices/putCommentsSlice';
-import { useAppDispatch, RootState } from '../app/store';
-
-function Form() {
-  const dispatch = useAppDispatch();
-
-  const commentById = useSelector(
-    (state: RootState) => state.getCommentByIdReducer.comment
-  );
-  const [commentFormValue, setCommentFormValue] = useState({
-    profile_url: commentById?.profile_url || '',
-    author: commentById?.author || '',
-    content: commentById?.comment?.content || '',
-    createdAt: commentById?.createdAt || '',
+function Form({ postdata, onEditData, editComment }) {
+  const [onEdit, setOnEdit] = useState(false);
+  const [formData, setFormData] = useState({
+    id: 0,
+    profile_url: "",
+    author: "",
+    content: "",
+    createdAt: "",
   });
 
-  const onPostingComment = (e: React.FormEvent<HTMLFormElement>) => {
-    const { profile_url, author, content, createdAt } = commentFormValue;
-    e.preventDefault();
-    dispatch(
-      postCommentsThunk({
-        profile_url,
-        author,
-        content,
-        createdAt,
-      })
-    );
+  useEffect(() => {
+    if (onEditData.id) setOnEdit(true);
+    setFormData(onEditData);
+  }, [onEditData]);
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onEditingComment = (e: React.FormEvent<HTMLFormElement>) => {
-    const { profile_url, author, content, createdAt } = commentFormValue;
-    const { id } = commentById;
-    e.preventDefault();
-    console.log({
-      id,
-      profile_url,
-      author,
-      content,
-      createdAt,
-    });
-    dispatch(
-      putCommentsThunk({
-        id,
-        profile_url,
-        author,
-        content,
-        createdAt,
-      })
-    );
-  };
-
-  // custom hook
-  const setProfileUrl = (e: any) => {
-    setCommentFormValue({
-      ...commentFormValue,
-      profile_url: e.target.value,
-    });
-  };
-
-  const setAuthor = (e: any) => {
-    setCommentFormValue({
-      ...commentFormValue,
-      author: e.target.value,
-    });
-  };
-
-  const setContent = (e: any) => {
-    setCommentFormValue({
-      ...commentFormValue,
-      content: e.target.value,
-    });
-  };
-
-  const setCreatedAt = (e: any) => {
-    setCommentFormValue({
-      ...commentFormValue,
-      createdAt: e.target.value,
+  const handleSubmit = () => {
+    if (!onEdit) postdata(formData);
+    if (onEdit) editComment(formData);
+    setFormData({
+      id: 0,
+      profile_url: "",
+      author: "",
+      content: "",
+      createdAt: "",
     });
   };
 
   return (
     <FormStyle>
-      <form
-        onSubmit={
-          commentById ? (e) => onEditingComment(e) : (e) => onPostingComment(e)
-        }
-      >
+      <form>
         <input
           type="text"
           name="profile_url"
-          value={commentFormValue.profile_url}
-          onChange={setProfileUrl}
           placeholder="https://picsum.photos/id/1/50/50"
+          value={formData.profile_url}
+          onChange={handleChange}
           required
         />
         <br />
         <input
           type="text"
           name="author"
-          value={commentFormValue.author}
-          onChange={setAuthor}
           placeholder="작성자"
+          value={formData.author}
+          onChange={handleChange}
         />
         <br />
         <textarea
           name="content"
-          value={commentFormValue.content}
-          onChange={setContent}
           placeholder="내용"
+          value={formData.content}
+          onChange={handleChange}
           required
         ></textarea>
         <br />
         <input
           type="text"
           name="createdAt"
-          value={commentFormValue.createdAt}
-          onChange={setCreatedAt}
-          placeholder="2023-01-19"
+          placeholder="2020-05-30"
+          value={formData.createdAt}
+          onChange={handleChange}
           required
         />
         <br />
-        <button type="submit">등록</button>
+        <button onClick={handleSubmit} type="submit">
+          {onEdit ? "수정" : "등록"}
+        </button>
       </form>
     </FormStyle>
   );
 }
-
-export default Form;
 
 const FormStyle = styled.div`
   & > form {
@@ -142,7 +89,7 @@ const FormStyle = styled.div`
     width: 98%;
     height: 50px;
   }
-  & > form > input[type='text'] {
+  & > form > input[type="text"] {
     padding: 5px 1%;
     width: 98%;
     margin-bottom: 10px;
@@ -154,3 +101,5 @@ const FormStyle = styled.div`
     cursor: pointer;
   }
 `;
+
+export default Form;
