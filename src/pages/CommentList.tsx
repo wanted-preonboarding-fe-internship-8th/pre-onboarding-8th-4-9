@@ -5,8 +5,6 @@ import { getCommentByIdThunk } from '../app/slices/getCommentByIdSlice';
 import { useAppDispatch } from '../app/store';
 
 function CommentList(comments: any) {
-  console.log('list,,,', comments);
-
   const dispatch = useAppDispatch();
 
   const getCommentIdHandler = (id: number) => {
