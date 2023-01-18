@@ -48,7 +48,7 @@ function FormList() {
         <input
           type="text"
           name="profile_url"
-          value={commentFormValue.profile_url}
+          value={commentFormValue?.profile_url || ''}
           onChange={(e) =>
             setCommentFormValue({
               ...commentFormValue,
@@ -62,7 +62,7 @@ function FormList() {
         <input
           type="text"
           name="author"
-          value={commentFormValue.author}
+          value={commentFormValue?.author || ''}
           onChange={(e) =>
             setCommentFormValue({
               ...commentFormValue,
@@ -74,7 +74,7 @@ function FormList() {
         <br />
         <textarea
           name="content"
-          value={commentFormValue.content}
+          value={commentFormValue?.content || ''}
           onChange={(e) =>
             setCommentFormValue({
               ...commentFormValue,
@@ -88,7 +88,7 @@ function FormList() {
         <input
           type="text"
           name="createdAt"
-          value={commentFormValue.createdAt}
+          value={commentFormValue?.createdAt || ''}
           onChange={(e) =>
             setCommentFormValue({
               ...commentFormValue,
