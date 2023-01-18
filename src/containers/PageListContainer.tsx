@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import PageList from '../components/PageList';
+import { fetchTotalComment } from '../features/Comments/fetchComments';
 
 function PageListContainer() {
-  return <PageList />;
+  const dispatch = useDispatch();
+  const { totalCount, error } = useSelector((state) => state.comments);
+
+  useEffect(() => {
+    dispatch(fetchTotalComment());
+  }, [dispatch]);
+
+  return <PageList totalCount={totalCount} />;
 }
 
 export default PageListContainer;

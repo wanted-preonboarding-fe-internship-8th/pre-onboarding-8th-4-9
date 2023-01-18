@@ -44,7 +44,7 @@ function Form({ postComment, onEditData, editComment }: FormType) {
 
   return (
     <FormStyle>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="profile_url"
@@ -79,9 +79,7 @@ function Form({ postComment, onEditData, editComment }: FormType) {
           required
         />
         <br />
-        <button onClick={handleSubmit} type="submit">
-          {onEdit ? '수정' : '등록'}
-        </button>
+        <button type="submit">{onEdit ? '수정' : '등록'}</button>
       </form>
     </FormStyle>
   );

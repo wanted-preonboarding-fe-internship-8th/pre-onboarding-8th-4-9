@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { CommentType } from '../../interfaces';
 
+import { fetchComments, fetchTotalComment } from './fetchComments';
+import { fetchOneComment } from './fetchOneComment';
+
 import { addComment } from './addComment';
 import { editComment } from './editComment';
-import { fetchComments } from './fetchComments';
-import { fetchOneComment } from './fetchOneComment';
 import { removeComment } from './removeComment';
 
 type stateType = {
@@ -38,6 +39,19 @@ const commentsSlice = createSlice({
     builder.addCase(fetchComments.rejected, (state, action) => {
       state.isLoading = false;
       // state.error = action.error;
+    });
+
+    // 토탈 페이지 계산을 위한 전체 댓글 로딩
+    builder.addCase(fetchTotalComment.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchTotalComment.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.totalCount = action.payload.length;
+    });
+    builder.addCase(fetchTotalComment.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
     });
 
     // 특정 댓글 하나 로딩
