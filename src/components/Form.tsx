@@ -6,7 +6,7 @@ import { CommentType } from '../interfaces';
 type FormType = {
   postComment: (comment: CommentType) => void;
   onEditData: any;
-  editComment: (comment: any) => void;
+  editComment: (comment: CommentType, newData: number) => void;
 };
 
 function Form({ postComment, onEditData, editComment }: FormType) {
@@ -32,7 +32,7 @@ function Form({ postComment, onEditData, editComment }: FormType) {
 
   const handleSubmit = () => {
     if (!onEdit) postComment(formData);
-    if (onEdit) editComment(formData);
+    if (onEdit) editComment(formData, formData.id);
     setFormData({
       id: 0,
       profile_url: '',
@@ -49,7 +49,7 @@ function Form({ postComment, onEditData, editComment }: FormType) {
           type="text"
           name="profile_url"
           placeholder="https://picsum.photos/id/1/50/50"
-          value={formData.profile_url}
+          value={formData.profile_url || ''}
           onChange={handleChange}
           required
         />
@@ -58,14 +58,14 @@ function Form({ postComment, onEditData, editComment }: FormType) {
           type="text"
           name="author"
           placeholder="작성자"
-          value={formData.author}
+          value={formData.author || ''}
           onChange={handleChange}
         />
         <br />
         <textarea
           name="content"
           placeholder="내용"
-          value={formData.content}
+          value={formData.content || ''}
           onChange={handleChange}
           required
         ></textarea>
@@ -74,7 +74,7 @@ function Form({ postComment, onEditData, editComment }: FormType) {
           type="text"
           name="createdAt"
           placeholder="2020-05-30"
-          value={formData.createdAt}
+          value={formData.createdAt || ''}
           onChange={handleChange}
           required
         />

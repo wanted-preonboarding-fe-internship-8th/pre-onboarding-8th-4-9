@@ -1,22 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
+
+import { CommentType } from '../../interfaces';
+
 import { fetchComments, fetchTotalComment } from './fetchComments';
 import { fetchOneComment } from './fetchOneComment';
+
 import { addComment } from './addComment';
 import { editComment } from './editComment';
 import { removeComment } from './removeComment';
 
+type stateType = {
+  data: CommentType[];
+  isLoading: boolean;
+  error: string | null;
+  onEditData: object | null;
+};
+
+const initialState: stateType = {
+  data: [],
+  isLoading: false,
+  error: null,
+  onEditData: {},
+};
+
 const commentsSlice = createSlice({
   name: 'comments',
-  initialState: {
-    totalCount: 0,
-    data: [],
-    isLoading: false,
-    error: null,
-    onEditData: {},
-  },
-
+  initialState,
   reducers: {},
-  extraReducers(builder) {
+  extraReducers: function (builder) {
     // 전체 댓글 로딩
     builder.addCase(fetchComments.pending, (state, action) => {
       state.isLoading = true;
@@ -27,7 +38,7 @@ const commentsSlice = createSlice({
     });
     builder.addCase(fetchComments.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.error;
+      // state.error = action.error;
     });
 
     // 토탈 페이지 계산을 위한 전체 댓글 로딩
@@ -53,7 +64,7 @@ const commentsSlice = createSlice({
     });
     builder.addCase(fetchOneComment.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.error;
+      // state.error = action.error;
     });
 
     // 새 댓글 생성
@@ -66,7 +77,7 @@ const commentsSlice = createSlice({
     });
     builder.addCase(addComment.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.error;
+      // state.error = action.error;
     });
 
     // 댓글 수정
@@ -75,13 +86,13 @@ const commentsSlice = createSlice({
     });
     builder.addCase(editComment.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.data = state.data.map((comment) =>
+      state.data = state.data.map((comment: CommentType) =>
         comment.id === action.payload.id ? action.meta.arg : comment
       );
     });
     builder.addCase(editComment.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.error;
+      // state.error = action.error;
     });
 
     // 댓글 삭제
@@ -96,7 +107,7 @@ const commentsSlice = createSlice({
     });
     builder.addCase(removeComment.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.error;
+      // state.error = action.error;
     });
   },
 });
