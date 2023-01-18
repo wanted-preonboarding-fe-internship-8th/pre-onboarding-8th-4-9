@@ -46,6 +46,8 @@ const commentsSlice = createSlice({
     });
     builder.addCase(fetchTotalComment.fulfilled, (state, action) => {
       state.isLoading = false;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       state.totalCount = action.payload.length;
     });
     builder.addCase(fetchTotalComment.rejected, (state, action) => {

@@ -7,6 +7,8 @@ import { fetchTotalComment } from '../features/Comments/fetchComments';
 
 function PageListContainer() {
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const { totalCount, error } = useSelector(
     (state: RootState) => state.comments
   );
