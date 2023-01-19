@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 import { CommentType, EditDataType } from '../interfaces';
 
@@ -11,7 +12,11 @@ type FormType = {
 
 function Form({ postComment, onEditData, editComment }: FormType) {
   const [onEdit, setOnEdit] = useState(false);
+  const navigate = useNavigate();
 
+  const onMovePage = (page: number) => {
+    navigate(`/${page}`);
+  };
   const [formData, setFormData] = useState({
     id: 0,
     profile_url: '',
@@ -33,7 +38,10 @@ function Form({ postComment, onEditData, editComment }: FormType) {
   };
 
   const handleSubmit = () => {
-    if (!onEdit) postComment(formData);
+    if (!onEdit) {
+      postComment(formData);
+      onMovePage(1);
+    }
     if (onEdit) editComment(formData);
     setFormData({
       id: 0,
