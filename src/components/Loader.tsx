@@ -14,7 +14,7 @@ const LoaderContainer = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: var(--white);
+  background: white;
 `;
 
 const Spinner = styled.div`
@@ -26,7 +26,7 @@ const Spinner = styled.div`
   width: 50px;
   margin: -25px 0 0 -25px;
   border: 2px solid transparent;
-  border-top-color: var(--gray3);
+  border-top-color: gray;
   border-radius: 50%;
   -webkit-animation: spin7 1.5s ease infinite;
   animation: spin7 1.5s ease infinite;
@@ -39,7 +39,7 @@ const Spinner = styled.div`
     left: 7px;
     border: 2px solid transparent;
     border-radius: 50%;
-    border-top-color: var(--gray3);
+    border-top-color: gray;
     -webkit-animation: spin7 3s linear infinite;
     animation: spin7 3s linear infinite;
   }
@@ -53,7 +53,7 @@ const Spinner = styled.div`
     left: 15px;
     border: 2px solid transparent;
     border-radius: 50%;
-    border-top-color: var(--gray3);
+    border-top-color: gray;
     -webkit-animation: spin7 1.5s ease infinite;
     animation: spin7 1.5s ease infinite;
   }
