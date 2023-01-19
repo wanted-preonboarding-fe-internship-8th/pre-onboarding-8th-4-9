@@ -10,13 +10,15 @@ import { removeComment } from './removeComment';
 
 type stateType = {
   commentData: CommentType[];
+  totalCount: number;
   isLoading: boolean;
-  error: string | null;
+  error: object | null;
   onEditData: object | null;
 };
 
 const initialState: stateType = {
   commentData: [],
+  totalCount: 0,
   isLoading: false,
   error: null,
   onEditData: {},
@@ -37,7 +39,7 @@ const commentsSlice = createSlice({
     });
     builder.addCase(fetchComments.rejected, (state, action) => {
       state.isLoading = false;
-      // state.error = action.error;
+      state.error = action.error;
     });
 
     // 토탈 페이지 계산을 위한 전체 댓글 로딩
@@ -46,13 +48,11 @@ const commentsSlice = createSlice({
     });
     builder.addCase(fetchTotalComment.fulfilled, (state, action) => {
       state.isLoading = false;
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       state.totalCount = action.payload.length;
     });
     builder.addCase(fetchTotalComment.rejected, (state, action) => {
       state.isLoading = false;
-      // state.error = action.error;
+      state.error = action.error;
     });
 
     // 특정 댓글 하나 로딩
@@ -65,7 +65,7 @@ const commentsSlice = createSlice({
     });
     builder.addCase(fetchOneComment.rejected, (state, action) => {
       state.isLoading = false;
-      // state.error = action.error;
+      state.error = action.error;
     });
 
     // 새 댓글 생성
@@ -78,7 +78,7 @@ const commentsSlice = createSlice({
     });
     builder.addCase(addComment.rejected, (state, action) => {
       state.isLoading = false;
-      // state.error = action.error;
+      state.error = action.error;
     });
 
     // 댓글 수정
@@ -93,7 +93,7 @@ const commentsSlice = createSlice({
     });
     builder.addCase(editComment.rejected, (state, action) => {
       state.isLoading = false;
-      // state.error = action.error;
+      state.error = action.error;
     });
 
     // 댓글 삭제
@@ -108,7 +108,7 @@ const commentsSlice = createSlice({
     });
     builder.addCase(removeComment.rejected, (state, action) => {
       state.isLoading = false;
-      // state.error = action.error;
+      state.error = action.error;
     });
   },
 });
