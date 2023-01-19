@@ -1,7 +1,8 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 function PageList(totalCount: any) {
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const onMovePage = (page: number) => {
@@ -11,11 +12,16 @@ function PageList(totalCount: any) {
   return (
     <PageListStyle>
       {totalCount.totalCount < 5 && <Page>1</Page>}
-      {totalCount.totalCount &&
+      {id &&
+        totalCount.totalCount &&
         Array(Math.ceil(totalCount.totalCount / 5))
           .fill(null)
           .map((count, idx: number) => (
-            <Page key={idx} onClick={() => onMovePage(idx + 1)}>
+            <Page
+              key={idx}
+              onClick={() => onMovePage(idx + 1)}
+              active={Number(id) === idx + 1}
+            >
               {idx + 1}
             </Page>
           ))}
@@ -28,13 +34,13 @@ const PageListStyle = styled.div`
   text-align: center;
 `;
 
-const Page = styled.button`
+const Page = styled.button<{ active?: boolean }>`
   padding: 0.375rem 0.75rem;
   border-radius: 0.25rem;
   font-size: 1rem;
   line-height: 1.5;
   border: 1px solid lightgray;
-  ${({ active }: any) =>
+  ${({ active }) =>
     active &&
     `
         background: gray;

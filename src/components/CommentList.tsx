@@ -6,7 +6,7 @@ import { CommentType } from '../interfaces';
 type CommentListProps = {
   isLoading: boolean;
   commentsData: CommentType[];
-  error: any;
+  error: object | null;
   fetchOneComment: (comment: CommentType) => void;
   removeComment: (comment: CommentType) => void;
 };
