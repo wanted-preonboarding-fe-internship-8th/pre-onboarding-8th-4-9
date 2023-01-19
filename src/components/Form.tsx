@@ -1,16 +1,17 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { CommentType } from '../interfaces';
+import { CommentType, EditDataType } from '../interfaces';
 
 type FormType = {
   postComment: (comment: CommentType) => void;
-  onEditData: any;
+  onEditData: EditDataType;
   editComment: (newComment: CommentType) => void;
 };
 
 function Form({ postComment, onEditData, editComment }: FormType) {
   const [onEdit, setOnEdit] = useState(false);
+
   const [formData, setFormData] = useState({
     id: 0,
     profile_url: '',

@@ -6,20 +6,25 @@ export interface CommentType {
   createdAt: string;
 }
 
+export interface EditDataType {
+  id: number;
+  profile_url: string;
+  author: string;
+  content: string;
+  createdAt: string;
+}
+
 export interface CommentstateType {
-  //TODO: initial type
-  comments: any;
+  comments: CommentType;
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
 export interface EditCommentState {
-  //TODO: initial type
-  comment: any;
+  comment: CommentType;
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
 export interface DeleteCommentState {
-  //TODO: initial type
   id: number | null;
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
