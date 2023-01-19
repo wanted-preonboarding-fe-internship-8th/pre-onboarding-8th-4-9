@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+import { FETCH_COMMENTS_TYPE_PREFIX } from '../../enums';
+
 type fetchCommentsType = {
   page: number;
   limit: number;
@@ -8,7 +10,7 @@ type fetchCommentsType = {
 };
 
 export const fetchComments = createAsyncThunk(
-  'comments/fetch',
+  FETCH_COMMENTS_TYPE_PREFIX.FETCH,
   async ({ page, limit, order, sort }: fetchCommentsType) => {
     const response = await fetch(
       `http://localhost:4000/comments?_page=${page}&_limit=${limit}&_order=${order}&_sort=${sort}`
