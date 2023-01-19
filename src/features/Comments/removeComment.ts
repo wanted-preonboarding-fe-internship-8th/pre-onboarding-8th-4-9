@@ -1,16 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+import { FETCH_COMMENTS_TYPE_PREFIX } from '../../enums';
 import { CommentType } from '../../interfaces';
 
 export const removeComment = createAsyncThunk(
-  'comments/remove',
+  FETCH_COMMENTS_TYPE_PREFIX.REMOVE,
   async (comment: CommentType) => {
-    const response = await fetch(
-      `http://localhost:4000/comments/${comment.id}`,
-      {
-        method: 'DELETE',
-      }
-    );
+    await fetch(`http://localhost:4000/comments/${comment.id}`, {
+      method: 'DELETE',
+    });
     return comment;
   }
 );

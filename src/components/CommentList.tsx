@@ -1,30 +1,31 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { fetchComments } from '../features/Comments/fetchComments';
 import { CommentType } from '../interfaces';
+
+import Loader from './Loader';
 
 type CommentListProps = {
   isLoading: boolean;
-  data: CommentType[];
-  error: any;
+  commentsData: CommentType[];
+  error: object | null;
   fetchOneComment: (comment: CommentType) => void;
   removeComment: (comment: CommentType) => void;
 };
 
 function CommentList({
   isLoading,
-  data,
+  commentsData,
   error,
   fetchOneComment,
   removeComment,
 }: CommentListProps) {
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>Error on fetching data...</div>;
   const navigate = useNavigate();
   return (
     <>
-      {data.map((comment: CommentType) => (
+      {commentsData.map((comment: CommentType) => (
         <Comment key={comment.id}>
           <img src={comment.profile_url} alt="" />
           {comment.author}
