@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { RootState, useAppDispatch } from '../app/store';
 import CommentList from '../components/CommentList';
 import Loader from '../components/Loader';
+import { FETCH_COMMENTS_OPTIONS } from '../enums';
 import { fetchComments } from '../features/Comments/fetchComments';
 import { fetchOneComment } from '../features/Comments/fetchOneComment';
 import { removeComment } from '../features/Comments/removeComment';
@@ -19,7 +20,12 @@ function CommentListContainer() {
 
   const onGetFetchComments = useCallback(async () => {
     await dispatch(
-      fetchComments({ page: Number(id), limit: 5, order: 'desc', sort: 'id' })
+      fetchComments({
+        page: Number(id),
+        limit: FETCH_COMMENTS_OPTIONS.LIMIT,
+        order: FETCH_COMMENTS_OPTIONS.ORDER,
+        sort: FETCH_COMMENTS_OPTIONS.SORT,
+      })
     );
   }, [id]);
 

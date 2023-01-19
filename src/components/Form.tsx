@@ -6,7 +6,7 @@ import { CommentType, EditDataType } from '../interfaces';
 
 type FormType = {
   postComment: (comment: CommentType) => void;
-  onEditData: EditDataType;
+  onEditData: EditDataType | null;
   editComment: (newComment: CommentType) => void;
 };
 
@@ -26,6 +26,7 @@ function Form({ postComment, onEditData, editComment }: FormType) {
   });
 
   useEffect(() => {
+    if (!onEditData) return;
     if (onEditData.id) setOnEdit(true);
     setFormData(onEditData);
   }, [onEditData]);
