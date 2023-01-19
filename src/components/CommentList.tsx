@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import Loader from './Loader';
 
 import { CommentType } from '../interfaces';
+
+import Loader from './Loader';
 
 type CommentListProps = {
   isLoading: boolean;
