@@ -1,7 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { FETCH_COMMENTS_OPTIONS } from '../enums';
 
-function PageList(totalCount: any) {
+type TotalCountType = {
+  totalCount: number;
+};
+
+function PageList(totalCount: TotalCountType) {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -11,10 +16,10 @@ function PageList(totalCount: any) {
 
   return (
     <PageListStyle>
-      {totalCount.totalCount < 5 && <Page>1</Page>}
+      {totalCount.totalCount < FETCH_COMMENTS_OPTIONS.LIMIT && <Page>1</Page>}
       {id &&
         totalCount.totalCount &&
-        Array(Math.ceil(totalCount.totalCount / 5))
+        Array(Math.ceil(totalCount.totalCount / FETCH_COMMENTS_OPTIONS.LIMIT))
           .fill(null)
           .map((count, idx: number) => (
             <Page
