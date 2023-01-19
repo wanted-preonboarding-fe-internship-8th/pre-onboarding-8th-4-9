@@ -9,14 +9,14 @@ import { fetchOneComment } from './fetchOneComment';
 import { removeComment } from './removeComment';
 
 type stateType = {
-  data: CommentType[];
+  commentData: CommentType[];
   isLoading: boolean;
   error: string | null;
   onEditData: object | null;
 };
 
 const initialState: stateType = {
-  data: [],
+  commentData: [],
   isLoading: false,
   error: null,
   onEditData: {},
@@ -33,7 +33,7 @@ const commentsSlice = createSlice({
     });
     builder.addCase(fetchComments.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.data = action.payload;
+      state.commentData = action.payload;
     });
     builder.addCase(fetchComments.rejected, (state, action) => {
       state.isLoading = false;
@@ -74,7 +74,7 @@ const commentsSlice = createSlice({
     });
     builder.addCase(addComment.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.data.push(action.payload);
+      state.commentData.push(action.payload);
     });
     builder.addCase(addComment.rejected, (state, action) => {
       state.isLoading = false;
@@ -87,7 +87,7 @@ const commentsSlice = createSlice({
     });
     builder.addCase(editComment.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.data = state.data.map((comment: CommentType) =>
+      state.commentData = state.commentData.map((comment: CommentType) =>
         comment.id === action.payload.id ? action.payload : comment
       );
     });
@@ -102,7 +102,7 @@ const commentsSlice = createSlice({
     });
     builder.addCase(removeComment.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.data = state.data.filter((user) => {
+      state.commentData = state.commentData.filter((user) => {
         return user.id !== action.payload.id;
       });
     });

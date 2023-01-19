@@ -1,11 +1,11 @@
 import styled from 'styled-components';
+import Loader from './Loader';
 
-import { fetchComments } from '../features/Comments/fetchComments';
 import { CommentType } from '../interfaces';
 
 type CommentListProps = {
   isLoading: boolean;
-  data: CommentType[];
+  commentsData: CommentType[];
   error: any;
   fetchOneComment: (comment: CommentType) => void;
   removeComment: (comment: CommentType) => void;
@@ -13,17 +13,17 @@ type CommentListProps = {
 
 function CommentList({
   isLoading,
-  data,
+  commentsData,
   error,
   fetchOneComment,
   removeComment,
 }: CommentListProps) {
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>Error on fetching data...</div>;
 
   return (
     <>
-      {data.map((comment: CommentType) => (
+      {commentsData.map((comment: CommentType) => (
         <Comment key={comment.id}>
           <img src={comment.profile_url} alt="" />
           {comment.author}

@@ -4,17 +4,18 @@ import { useParams } from 'react-router-dom';
 
 import { RootState, useAppDispatch } from '../app/store';
 import CommentList from '../components/CommentList';
+import Loader from '../components/Loader';
 import { fetchComments } from '../features/Comments/fetchComments';
 import { fetchOneComment } from '../features/Comments/fetchOneComment';
 import { removeComment } from '../features/Comments/removeComment';
 import { CommentType } from '../interfaces';
 
 function CommentListContainer() {
+  const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { isLoading, data, error } = useSelector(
+  const { isLoading, commentData, error } = useSelector(
     (state: RootState) => state.comments
   );
-  const { id } = useParams();
 
   const onGetFetchComments = useCallback(async () => {
     await dispatch(
@@ -29,7 +30,7 @@ function CommentListContainer() {
   return (
     <CommentList
       isLoading={isLoading}
-      data={data}
+      commentsData={commentData}
       error={error}
       fetchOneComment={(comment: CommentType) =>
         dispatch(fetchOneComment(comment))
