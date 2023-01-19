@@ -21,7 +21,13 @@ const initialState: stateType = {
   totalCount: 0,
   isLoading: false,
   error: null,
-  onEditData: {},
+  onEditData: {
+    id: 0,
+    profile_url: '',
+    author: '',
+    content: '',
+    createdAt: '',
+  },
 };
 
 const commentsSlice = createSlice({

@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+
 import { FETCH_COMMENTS_OPTIONS } from '../enums';
 
 type TotalCountType = {

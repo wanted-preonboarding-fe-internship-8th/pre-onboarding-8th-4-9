@@ -24,7 +24,6 @@ function Form({ postComment, onEditData, editComment }: FormType) {
     content: '',
     createdAt: '',
   });
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!onEditData) return;
