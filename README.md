@@ -4,8 +4,8 @@
 
 1. [댓글 CRUD](https://github.com/wanted-preonboarding-fe-internship-8th/pre-onboarding-8th-4-9/wiki/1.-%EB%8C%93%EA%B8%80-CRUD)
 2. [페이지네이션]()
-3. [댓글 작성, 수정, 삭제 후 동작](https://github.com/wanted-preonboarding-fe-internship-8th/pre-onboarding-8th-4-9/wiki/%EB%8C%93%EA%B8%80-%EC%9E%91%EC%84%B1,-%EC%88%98%EC%A0%95,-%EC%82%AD%EC%A0%9C-%ED%9B%84-%EB%8F%99%EC%9E%91)
-
+3. [댓글 작성, 수정, 삭제 후 동작](https://github.com/wanted-preonboarding-fe-internship-8th/pre-onboarding-8th-4-9/wiki/3.-%EB%8C%93%EA%B8%80-%EC%9E%91%EC%84%B1,-%EC%88%98%EC%A0%95,-%EC%82%AD%EC%A0%9C-%ED%9B%84-%EB%8F%99%EC%9E%91)
+4. [RTK 채택 및 관심사의 분리](https://github.com/wanted-preonboarding-fe-internship-8th/pre-onboarding-8th-4-9/wiki/4.-RTK-%EC%B1%84%ED%83%9D-%EB%B0%8F-%EA%B4%80%EC%8B%AC%EC%82%AC%EC%9D%98-%EB%B6%84%EB%A6%AC)
 ## 실행 방법
 
 ```bash
