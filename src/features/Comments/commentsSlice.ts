@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { CommentType } from '../../interfaces';
+import { CommentType, EditDataType } from '../../interfaces';
 
 import { addComment } from './addComment';
 import { editComment } from './editComment';
@@ -13,7 +13,7 @@ type stateType = {
   totalCount: number;
   isLoading: boolean;
   error: object | null;
-  onEditData: object | null;
+  onEditData: EditDataType | null;
 };
 
 const initialState: stateType = {
